@@ -1,4 +1,4 @@
-'''Pseydocode
+'''Pseudocode
 
 Create a book repository database <ebookstore> to list books in the repository in a table <book>.
 The table <book> has four columns; book id, book tilte, book author, available book quantity.
@@ -97,7 +97,10 @@ for book in book_details:
 
     if existing_book_id:
         # A book with the same title already exists, you can choose to skip or update.
-        print(f"Book '{book_title}' already exists with ID {existing_book_id[0]}. Skipping insertion.")
+        # Message was amended to add clarity
+        print(f"The book titled '{book_title}' already exists in the database."
+             "\n The ID of the book is {existing_book_id[0]}."
+             "\n The book will not be inserted again in the database.")
     else:
         # Insert the book into the table
         cursor.execute(
@@ -119,7 +122,8 @@ try:
 
 # Handles exception errors
 except sqlite3.IntegrityError:
-    print("Error: An entry with the same ID already exists in the table.")
+    # The error message is amended for clarity
+    print("This is an error message: There is already an entry with the same ID in the database.")
 except sqlite3.Error as e:
     print(f"An error occurred: {e}")
 # Saves changes to the database <ebookstore>
@@ -143,7 +147,9 @@ def enter_book():
         
         # Tests the length of title entered, which needs to be greater than zero    
         if len(new_book_title) == 0: 
-            print("\nYou have not entered a valid book title.\n")
+            # Message amended for clarity
+            print("\nThe title you have entered is not valid."
+                  "\nYou should enter at least one character or digit.\n")
             continue
 
         # Checks if the new book title is already in the database
@@ -161,8 +167,10 @@ def enter_book():
                 
         else:
             # Checkpoint of code until now
+            # Message amended for clarity
             print("The database has been searched."
-               "\nThe book does not exist in the repository. Answer the questions to add it.")
+               "\nThe book does not exist in the repository."
+               "\nTo add the new book in the database, enter the required information below.")
             continue
             
         # Asks the user to enter the name of the author of the new book
@@ -170,7 +178,9 @@ def enter_book():
         # Checks that the length of the entry is valid (not zero in lenght)
         if len(new_book_author) == 0: 
             # If the user has not entered anything (lenght of entry equals zero)
-            print("\nYou have not entered a valid author name.\n")
+            # Message amended for clarity
+            print("\nThe author name you have entered is not valid."
+                  "\nYou should enter at least one character or digit.\n")
             # Continues until the user enters a valid input
             continue
         # if the author entry is correct, asks the user for the quantity of the books in stock
@@ -180,11 +190,13 @@ def enter_book():
             # Checks that the quanity entered is a positive integer and hence valid
             # If the quantity entered is a negative integer or zero, the user receives an error message
             if new_book_quantity <= 0:
-                print("You have not entered a valid quantity number. Quantity must be a number larger than zero.")
+                # Message amended for clarity
+                print("The quantity number you have entered is not valid. Quantity must be a number larger than zero.")
                 # Loops until the user enters a valid quantity number (positive integer)
                 continue
         except ValueError:
-            print("You have not entered a valid number.")
+            # Message amended for clarity
+            print("The number you have entered is not valid. The number should be an integer greater to zero.")
             continue
         # If the user enters a valid integer, the data about the new book are entered in the database
         #else:
@@ -235,7 +247,8 @@ def update_book():
     
     # If the book id does not exist, returns an error message
     if not book:
-        print("There are no books with this ID in the repository.")
+        # Message amended for clarity
+        print("The repository does not contain books with this ID. Please, check the ID of the book.")
         return
     # If the book id the user entered is correct (in the database)
     elif book:
@@ -280,7 +293,8 @@ def update_book():
     # If the book id the user entered is not in the database
     # Prints an error message for the user
     else:
-        print("The book was not found in the repository.")
+        # Message amended for clarity
+        print("The book you have entered was not found in the repository.")
     
 
 # Defines function <delete_book> for user option 3 to delete an existing book from the database
@@ -342,7 +356,9 @@ def delete_book():
         db.commit()
         
     else:
-        print("You have not entered a valid choice.")
+        # Message amended for clarity
+        print("The choice you have entered is not valid."
+            "\nValid choices are 'Y' or 'N'.")
 
     
 # Defines function <search_book> for user option 4 to search for an existing book in the database
@@ -388,11 +404,14 @@ def search_books():
         cursor.execute('SELECT * FROM book WHERE qty = 0')
         searched_books = cursor.fetchall()
         if not searched_books:
-            print("There are no out of stock books.")
+            # Message amended for clarity
+            print("All books in the repository are in stock (no books with zero quantity).")
             return
     # Else in case the user does not enter a valid option
     else:
-        print("This option does not exist.")
+        # Message amended for clarity
+        print("The option you have chosed is not valid."
+            "\n The valid options are BT or BA or LS or OFS.")
         return
 
     if searched_books:
