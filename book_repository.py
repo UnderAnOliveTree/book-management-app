@@ -432,13 +432,14 @@ def search_books():
 def user_action():  
     # Option 5. Exit was chosen oven 0. exit in case users confuse 0 with O
     while True:    
-        user_choice = input("\nChoose one of the following options:"
+        # Menu text changed for user to know that they should enter only the number to select an option
+        user_choice = input("\nYou can choose one of the following options:"
                             "\n\t 1. Enter a new book in the repository"
                             "\n\t 2. Update the information of a book in the repository"
                             "\n\t 3. Delete a book from the repository"
                             "\n\t 4. Search for a book in repository"
                             "\n\t 5. Exit the program."
-                            "\nWhat do you want to do? "
+                            "\n Please, enter the number of the option you want to choose: "
                             )
         # if-elif statement to provide the actions for each of the user's choices
         # If the user choses <1. Enter a new book in the repository>        
